@@ -7,3 +7,12 @@ export function signup(email, password) {
 export function signin(email, password) {
     return auth().signInWithEmailAndPassword(email, password)
 }
+
+export function getCurrentUser(){
+    return auth().currentUser();
+}
+
+export function signInWithGoogle(){
+    const provider = new auth.GoogleAuthProvider();
+    return auth().signInWithPopup(provider);
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { signup } from '../helpers/auth';
+import { signup, signInWithGoogle } from '../helpers/auth';
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
@@ -18,6 +18,14 @@ export default function SignUp() {
             await signup(email, password);
 
         }catch (error){
+            setError(error.message)
+        }
+    }
+
+    const googleSignIn = async () => {
+        try{
+            await signInWithGoogle();
+        }catch(error){
             setError(error.message)
         }
     }
@@ -46,7 +54,10 @@ export default function SignUp() {
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Submit
+                    Sign Up
+                </Button>
+                <Button variant="primary" onClick={googleSignIn}>
+                    Sign Up with Google
                 </Button>
             </Form>
         </Container>

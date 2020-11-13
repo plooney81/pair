@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 import { signin, singInWithGoogle, signInWithGitHub, signup } from '../helpers/auth';
 import { Form, Button, Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/action';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -13,20 +13,21 @@ export default function Login() {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // setError('');
-        // setEmail('');
-        // setPassword('');
-        // try {
-        //     await signup(email, password);
+        setError('');
+        setEmail('');
+        setPassword('');
+        try {
+            await signin(email, password);
 
-        // }catch (error){
-        //     setError(error.message)
-        // }
+        }catch (error){
+            setError(error.message)
+        }
         dispatch(login())
     }
+
     return (
         <Container className="mt-5">
-            <h1>Sign Up</h1>
+            <h1>Login</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
@@ -49,8 +50,11 @@ export default function Login() {
                     <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Submit
+                    Login
                 </Button>
+                <Form.Text className="danger mt-3">
+                    Don't have an account? <Link to='/signup'>Sign up</Link>
+                </Form.Text>
             </Form>
         </Container>
     )
