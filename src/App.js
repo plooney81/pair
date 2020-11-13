@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import Home from './pages/Home';
+import Chat from './pages/Chat';
+import Signup from './pages/SignUp';
+import Login from './pages/Login';
+import { auth } from './services/firebase';
+import {useSelector, useDispatch} from 'react-redux';
 
-function App() {
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationBar from './components/NavigationBar';
+
+export default function App() {
+  // const isLoggedIn = useSelector(state => state)
+  const dispatch = useDispatch();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+      <NavigationBar/>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          {useSelector(state => state).authenticated && (
+            <Route path="/chat" component={Chat} />
+          )}
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
+          <Route>
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
