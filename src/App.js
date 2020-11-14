@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
 import Chat from './pages/Chat';
@@ -13,13 +13,15 @@ import NavigationBar from './components/NavigationBar';
 export default function App() {
   // const isLoggedIn = useSelector(state => state)
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  console.log(Object.keys(user).length > 0)
   return (
     <div>
       <BrowserRouter>
       <NavigationBar/>
         <Switch>
           <Route exact path="/" component={Home} />
-          {useSelector(state => state).authenticated && (
+          {Object.keys(user).length > 0 && (
             <Route path="/chat" component={Chat} />
           )}
           <Route path="/signup" component={Signup} />

@@ -2,18 +2,18 @@ import { combineReducers } from "redux";
 import { SET_LOGIN, SET_LOGOUT } from "./action";
 
 
-const authinticationReducer = (state=false, action) => {
+const userReducer = (state=[], action) => {
     switch (action.type){
         case SET_LOGIN:
-            return true
+            return action.payload.userInfo;
         case SET_LOGOUT:
-            return false
+            return [];
         default:
-            return state
+            return state;
     }
 }
 
 
 export const rootReducer = combineReducers({
-    authenticated: authinticationReducer
+    user: userReducer
 })
