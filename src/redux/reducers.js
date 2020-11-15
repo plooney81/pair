@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { SET_LOGIN, SET_LOGOUT } from "./action";
+import { SET_LOGIN, SET_LOGOUT, SET_READ_ERROR, SET_WRITE_ERROR } from "./action";
 
 
 const userReducer = (state=[], action) => {
@@ -13,7 +13,27 @@ const userReducer = (state=[], action) => {
     }
 }
 
+const readErrorReducer = (state='', action) => {
+    switch (action.type){
+        case SET_READ_ERROR:
+            return action.payload.error;
+        default:
+            return state;
+    }
+}
+
+const writeErrorReducer = (state='', action) => {
+    switch (action.type){
+        case SET_WRITE_ERROR:
+            return action.payload.error;
+        default:
+            return state;
+    }
+}
+
 
 export const rootReducer = combineReducers({
-    user: userReducer
+    user: userReducer,
+    readError: readErrorReducer,
+    writeError: writeErrorReducer,
 })

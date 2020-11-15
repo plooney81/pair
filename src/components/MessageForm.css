@@ -1,0 +1,22 @@
+svg{
+    margin-right: 10px;
+}
+
+svg:hover{
+    cursor: pointer;
+}
+
+.icons-group{
+    margin: 0 0 10px 10px;
+}
+
+.message-form{
+    border: 1px solid var(--shades)!important;
+    border-radius: 5px;
+    background-color: var(--light)!important;
+}
+
+.text-input{
+    background-color: var(--light)!important;
+    border-radius: 5px;
+}
