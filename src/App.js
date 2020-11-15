@@ -15,7 +15,6 @@ export default function App() {
   // const isLoggedIn = useSelector(state => state)
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
-  console.log(Object.keys(user).length > 0)
   return (
     <div>
       <BrowserRouter>

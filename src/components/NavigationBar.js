@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { logout } from '../redux/action';
 import { auth } from '../services/firebase';
-
+import './NavigationBar.css';
 
 export default function NavigationBar() {
     const isLoggedIn = useSelector(state => state)
@@ -25,8 +25,8 @@ export default function NavigationBar() {
             })
     }
     return (
-        <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar bg="dark" variant="dark" className='navbar'>
+            <Navbar.Brand><NavLink to="/">Navbar</NavLink></Navbar.Brand>
             <Nav className="mr-auto">
             <Nav.Link>
                 <NavLink to="/">Home</NavLink>
