@@ -3,6 +3,8 @@ export const SET_LOGOUT = 'SET_LOGOUT';
 export const SET_READ_ERROR = 'SET_READ_ERROR';
 export const SET_WRITE_ERROR = 'SET_WRITE_ERROR';
 export const SET_MESSAGES = 'SET_MESSAGES';
+export const SET_ALL_USERS_GROUPS = 'SET_ALL_USERS_GROUPS';
+export const ADD_NEW_USER_GROUP = 'ADD_NEW_USER_GROUP';
 
 export const login = (userInfo) => {
     return {
@@ -42,6 +44,24 @@ export const setMessagesAction = (messages) => {
         type: SET_MESSAGES,
         payload: {
             messages
+        }
+    }
+}
+
+export const setUsersGroupsList = (groups) => {
+    return {
+        type: SET_ALL_USERS_GROUPS,
+        payload: {
+            groups
+        }
+    }
+}
+
+export const addNewUserGroup = (group) => {
+    return {
+        type: ADD_NEW_USER_GROUP,
+        payload: {
+            group
         }
     }
 }
