@@ -13,14 +13,14 @@ import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList } from '../
 export default function Chat() {
 const user = useSelector(state => state.user)
 const messages = useSelector(state => state.messages)
+const currentGroup = useSelector(state => state.currentChatGroup)
 const [readError, setReadError] = useState(null);
 const dispatch = useDispatch()
 
 
 const messagesDbRef = db.ref("messages");
-//TODO This will eventually need to change depending on what group the user has currently clicked on
-//TODO needs to be in the redux store eventually
-const groupRef = `group1`
+
+const groupRef = currentGroup
 
 const usersGroupDbRef = db.ref(`users/${user.user.uid}/groups`);
 const allGroupsDbRef = db.ref(`groups`);
@@ -51,6 +51,7 @@ useEffect(() => {
         dispatch(setUsersGroupsList(newGroupArray));
     })
 
+    //! Get all of the available groups in the channel
     allGroupsDbRef.on('value', (groups) => {
         const allGroupArray = [];
         groups.forEach((group) => {
@@ -58,7 +59,7 @@ useEffect(() => {
         })
         dispatch(setAllPossibleGroups(allGroupArray));
     })
-}, [])
+}, [groupRef])
 
     return (
         <div className="d-flex" >

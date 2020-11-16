@@ -6,6 +6,7 @@ export const SET_MESSAGES = 'SET_MESSAGES';
 export const SET_ALL_USERS_GROUPS = 'SET_ALL_USERS_GROUPS';
 export const ADD_NEW_USER_GROUP = 'ADD_NEW_USER_GROUP';
 export const SET_ALL_POSSIBLE_GROUPS = 'SET_ALL_POSSIBLE_GROUPS';
+export const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT';
 
 export const login = (userInfo) => {
     return {
@@ -72,6 +73,15 @@ export const setAllPossibleGroups = (groups) => {
         type: SET_ALL_POSSIBLE_GROUPS,
         payload: {
             groups
+        }
+    }
+}
+
+export const setCurrentChat = (chat) => {
+    return {
+        type: SET_CURRENT_CHAT,
+        payload: {
+            chat
         }
     }
 }

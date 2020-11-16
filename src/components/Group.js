@@ -1,7 +1,8 @@
 import { faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentChat } from '../redux/action'
 import { db } from '../services/firebase'
 import './Group.css';
 
@@ -10,6 +11,7 @@ export default function Group({group, notOn}) {
     const groupsDbRef = db.ref("groups")
     const user = useSelector((state) => state.user)
     const usersGroupDbRef = db.ref(`users/${user.user.uid}/groups`);
+    const dispatch = useDispatch();
     useEffect(() => {
         console.log(group)
         groupsDbRef.child(group).once("value")
@@ -35,8 +37,7 @@ export default function Group({group, notOn}) {
     }
 
     const changeCurrentGroup = () => {
-        //Dispatch current groupFocus and change to this groups name
-        console.log('Hey');
+        dispatch(setCurrentChat(group))
     }
 
     return (

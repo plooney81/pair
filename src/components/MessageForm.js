@@ -11,9 +11,10 @@ export default function MessageForm() {
     const [content, setContent] = useState('');
     const messagesArray = useSelector(state => state.messages)
     const user = useSelector(state => state.user)
+    const currentGroup = useSelector(state => state.currentChatGroup)
     const dispatch = useDispatch();
     const messages = db.ref().child("messages");
-    const primaryKey = `group1/m${messagesArray.length}`;
+    const primaryKey = `${currentGroup}/m${messagesArray.length}`;
     const handleSubmit = (e) => {
         e.preventDefault();
         setContent('');
