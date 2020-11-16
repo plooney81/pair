@@ -9,15 +9,19 @@ import './MessageForm.css';
 
 export default function MessageForm() {
     const [content, setContent] = useState('');
+    const messagesArray = useSelector(state => state.messages)
     const user = useSelector(state => state.user)
     const dispatch = useDispatch();
+    const messages = db.ref().child("messages");
+    const primaryKey = `group1/m${messagesArray.length}`;
     const handleSubmit = (e) => {
         setContent('');
-        db.ref("messages/group1").push({
-            uid: user.user.uid,
+        messages.child(primaryKey).set({
+            name: user.user.displayName,
             content,
-            timeStamp: Date.now()
-        }, (error) => {
+            timeStamp: Date.now(),
+            uid: user.user.uid
+        }, error => {
             if(error){
                 dispatch(writeError(error))
             }else{

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import { auth } from '../services/firebase';
+import { auth, db } from '../services/firebase';
 import googleLogo from './google.svg';
 import githubLogo from './github.png';
 
 
 import { signup, signInWithGoogle, signInWithGitHub } from '../helpers/auth';
 import { useDispatch } from 'react-redux';
-import { login } from '../redux/action';
+import { login, readError, writeError } from '../redux/action';
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
@@ -19,7 +19,8 @@ export default function SignUp() {
     const history = useHistory();
     const chatLocation = { pathname: '/chat', state: {fromLogin: true}}
 
-    
+    const usersDbRef = db.ref().child("users");
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -27,19 +28,48 @@ export default function SignUp() {
         setPassword('');
         await signup(email, password)
             .then((res) => {
+                const {displayName, photoURL, email, uid} = res.user
                 dispatch(login(res))
+                usersDbRef.child(`${uid}`).set({
+                    displayName,
+                    photoURL,
+                    email,
+                    uid,
+                    groups: ['group1']
+                }, error => {
+                    if(error){
+                        dispatch(writeError(error))
+                    }else{
+                        dispatch(writeError('Successful'))
+                    }
+                })
                 history.push(chatLocation)
             })
             .catch((error) => {
                 setError(error.message);
+                console.log(error.message);
             })
     }
 
     const googleSignIn = async () => {
         await signInWithGoogle()
         .then((res) => {
-            dispatch(login(res))
-            history.push(chatLocation)
+            const {displayName, photoURL, email, uid} = res.user
+                dispatch(login(res))
+                usersDbRef.child(`${uid}`).set({
+                    displayName,
+                    photoURL,
+                    email,
+                    uid,
+                    groups: ['group1']
+                }, error => {
+                    if(error){
+                        dispatch(writeError(error))
+                    }else{
+                        dispatch(writeError('Successful'))
+                    }
+                })
+                history.push(chatLocation)
         })
         .catch((error) => {
             setError(error.message);
@@ -49,8 +79,22 @@ export default function SignUp() {
     const gitHubSignIn = async () => {
         await signInWithGitHub()
         .then((res) => {
-            dispatch(login(res))
-            history.push(chatLocation)
+            const {displayName, photoURL, email, uid} = res.user
+                dispatch(login(res))
+                usersDbRef.child(`${uid}`).set({
+                    displayName,
+                    photoURL,
+                    email,
+                    uid,
+                    groups: ['group1']
+                }, error => {
+                    if(error){
+                        dispatch(writeError(error))
+                    }else{
+                        dispatch(writeError('Successful'))
+                    }
+                })
+                history.push(chatLocation)
         })
         .catch((error) => {
             setError(error.message);

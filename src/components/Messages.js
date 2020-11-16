@@ -3,14 +3,14 @@ import { Card } from 'react-bootstrap';
 
 export default function Messages({message}) {
     return (
-        <Card style={{width: '70vw'}} className='chat-card'>
+        <Card className='chat-card'>
             <Card.Header className="d-flex justify-content-around">
-                <span>Messenger Name</span>
-                <span>Message Time</span>
+                <span>{message.name}</span>
+                <span>{message.timestamp}</span>
             </Card.Header>
             <Card.Body>
                 <Card.Text>
-                Message Content
+                {message.content}
                 </Card.Text>
             </Card.Body>
         </Card>
