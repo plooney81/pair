@@ -15,6 +15,7 @@ export default function MessageForm() {
     const messages = db.ref().child("messages");
     const primaryKey = `group1/m${messagesArray.length}`;
     const handleSubmit = (e) => {
+        e.preventDefault();
         setContent('');
         messages.child(primaryKey).set({
             name: user.user.displayName,

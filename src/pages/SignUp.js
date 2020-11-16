@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import { auth, db } from '../services/firebase';
 import googleLogo from './google.svg';
 import githubLogo from './github.png';
 
 
 import { signup, signInWithGoogle, signInWithGitHub } from '../helpers/auth';
 import { useDispatch } from 'react-redux';
-import { login, readError, writeError } from '../redux/action';
+import { login, writeError } from '../redux/action';
+import { signUpFunction } from '../services/usersDbFunctions';
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const dispatch = useDispatch()
-    
     const history = useHistory();
     const chatLocation = { pathname: '/chat', state: {fromLogin: true}}
+    const dispatch = useDispatch()
 
-    const usersDbRef = db.ref().child("users");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,48 +26,33 @@ export default function SignUp() {
         setPassword('');
         await signup(email, password)
             .then((res) => {
-                const {displayName, photoURL, email, uid} = res.user
+                //! First argument is user data, the second is the group number they belong to
                 dispatch(login(res))
-                usersDbRef.child(`${uid}`).set({
-                    displayName,
-                    photoURL,
-                    email,
-                    uid,
-                    groups: ['group1']
-                }, error => {
-                    if(error){
-                        dispatch(writeError(error))
-                    }else{
-                        dispatch(writeError('Successful'))
-                    }
-                })
+                let userResponse = signUpFunction(res, 1)
+                if(userResponse === error){
+                    dispatch(writeError(error))
+                }else{
+                    dispatch(writeError('Successful'))
+                }
                 history.push(chatLocation)
             })
             .catch((error) => {
                 setError(error.message);
-                console.log(error.message);
             })
     }
 
     const googleSignIn = async () => {
         await signInWithGoogle()
         .then((res) => {
-            const {displayName, photoURL, email, uid} = res.user
-                dispatch(login(res))
-                usersDbRef.child(`${uid}`).set({
-                    displayName,
-                    photoURL,
-                    email,
-                    uid,
-                    groups: ['group1']
-                }, error => {
-                    if(error){
-                        dispatch(writeError(error))
-                    }else{
-                        dispatch(writeError('Successful'))
-                    }
-                })
-                history.push(chatLocation)
+            //! First argument is user data, the second is the group number they belong to
+            dispatch(login(res))
+            let userResponse = signUpFunction(res, 1)
+            if(userResponse === error){
+                dispatch(writeError(error))
+            }else{
+                dispatch(writeError('Successful'))
+            }
+            history.push(chatLocation)
         })
         .catch((error) => {
             setError(error.message);
@@ -79,22 +62,15 @@ export default function SignUp() {
     const gitHubSignIn = async () => {
         await signInWithGitHub()
         .then((res) => {
-            const {displayName, photoURL, email, uid} = res.user
-                dispatch(login(res))
-                usersDbRef.child(`${uid}`).set({
-                    displayName,
-                    photoURL,
-                    email,
-                    uid,
-                    groups: ['group1']
-                }, error => {
-                    if(error){
-                        dispatch(writeError(error))
-                    }else{
-                        dispatch(writeError('Successful'))
-                    }
-                })
-                history.push(chatLocation)
+            //! First argument is user data, the second is the group number they belong to
+            dispatch(login(res))
+            let userResponse = signUpFunction(res, 1)
+            if(userResponse === error){
+                dispatch(writeError(error))
+            }else{
+                dispatch(writeError('Successful'))
+            }
+            history.push(chatLocation)
         })
         .catch((error) => {
             setError(error.message);
