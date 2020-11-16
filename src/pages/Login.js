@@ -6,7 +6,7 @@ import { login } from '../redux/action';
 import { Link, useHistory } from 'react-router-dom';
 import googleLogo from './google.svg';
 import githubLogo from './github.png';
-import { signUpFunction } from '../services/usersDbFunctions';
+import { signInFunction } from '../services/usersDbFunctions';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -24,7 +24,7 @@ export default function Login() {
         await signin(email, password)
             .then((res) => {
                 dispatch(login(res))
-                signUpFunction(res);
+                signInFunction(res);
                 history.push(chatLocation)
             })
             .catch((error) => {
@@ -36,7 +36,7 @@ export default function Login() {
         await signInWithGoogle()
         .then((res) => {
             dispatch(login(res))
-            signUpFunction(res);
+            signInFunction(res);
             history.push(chatLocation)
         })
         .catch((error) => {
@@ -48,7 +48,7 @@ export default function Login() {
         await signInWithGitHub()
         .then((res) => {
             dispatch(login(res))
-            signUpFunction(res)
+            signInFunction(res)
             history.push(chatLocation)
         })
         .catch((error) => {

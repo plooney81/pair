@@ -1,5 +1,5 @@
 import { db } from './firebase';
-const usersDbRef = db.ref().child("users");
+const usersDbRef = db.ref("users");
 
 //? First parameter is the user data which we grab certain portions of and put them in the new user node
 //? Second parameter is the initial group the user is added too.
@@ -24,9 +24,9 @@ export const signUpFunction = (userData, groupNumber=1) => {
 //? If it isn't then it adds it, calling our function from above, if it does already exist, then we don't do anything.
 export const signInFunction = (userData) => {
     const { uid } = userData.user;
-    return usersDbRef.child(uid).once("value")
+    usersDbRef.child(uid).once("value")
         .then((snapshot) => {
-            //! exists() method is part of the snapshot object which is returned by firebase queries
+            // //! exists() method is part of the snapshot object which is returned by firebase queries
             if(snapshot.exists()){
                 console.log('exists');
             }else{

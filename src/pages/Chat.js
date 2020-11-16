@@ -7,7 +7,7 @@ import SideBar from '../components/SideBar';
 import Messages from '../components/Messages';
 import './Chat.css';
 import MessageForm from '../components/MessageForm';
-import { setMessagesAction } from '../redux/action';
+import { setMessagesAction, setUsersGroupsList } from '../redux/action';
 
 
 export default function Chat() {
@@ -22,7 +22,7 @@ const messagesDbRef = db.ref("messages");
 //TODO needs to be in the redux store eventually
 const groupRef = `group1`
 
-const groupsDbRef = db.ref("groups");
+const usersGroupDbRef = db.ref(`users/${user.user.uid}/groups`);
 
 useEffect(() => {
     //! references to the chats path in the DB
@@ -40,11 +40,15 @@ useEffect(() => {
     } catch (error){
         dispatch(readError(error));
     }
+
     //! Get the current users groups they belong too.
-    groupsDbRef.once("value")
-        .then((snapshot) => {
-            
+    usersGroupDbRef.on('value', (groups) => {
+        const newGroupArray = [];
+        groups.forEach((group) => {
+            newGroupArray.push(group.val());
         })
+        dispatch(setUsersGroupsList(newGroupArray))
+    })
 
 }, [])
 
