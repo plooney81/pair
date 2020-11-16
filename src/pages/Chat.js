@@ -13,10 +13,16 @@ import { setMessagesAction } from '../redux/action';
 export default function Chat() {
 const user = useSelector(state => state.user)
 const messages = useSelector(state => state.messages)
-const [content, setContent] = useState('');
 const [readError, setReadError] = useState(null);
-const [writeError, setWriteError] = useState(null);
 const dispatch = useDispatch()
+
+
+const messagesDbRef = db.ref("messages");
+//TODO This will eventually need to change depending on what group the user has currently clicked on
+//TODO needs to be in the redux store eventually
+const groupRef = `group1`
+
+const groupsDbRef = db.ref("groups");
 
 useEffect(() => {
     //! references to the chats path in the DB
@@ -24,7 +30,7 @@ useEffect(() => {
 
     //! Connection is created to the Firebase db by using the .on() method.
     try{
-        db.ref("messages/group1").on("value", (messages) => {
+        messagesDbRef.child(groupRef).on("value", (messages) => {
             const newChatArray = [];
             messages.forEach((message) => {
                 newChatArray.push(message.val());
@@ -34,6 +40,11 @@ useEffect(() => {
     } catch (error){
         dispatch(readError(error));
     }
+    //! Get the current users groups they belong too.
+    groupsDbRef.once("value")
+        .then((snapshot) => {
+            
+        })
 
 }, [])
 

@@ -57,4 +57,5 @@ export const rootReducer = combineReducers({
     readError: readErrorReducer,
     writeError: writeErrorReducer,
     messages: setMessagesReducer,
+    userGroups: userGroupReducer
 })
