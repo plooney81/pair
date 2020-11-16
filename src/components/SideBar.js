@@ -16,9 +16,6 @@ export default function SideBar() {
         //! This filters out all of the groups that current user doesn't below too
         const difference = allGroups.filter((group) => !userGroups.includes(group));
         setDifferenceArray(difference);
-        console.log(userGroups)
-        console.log(allGroups);
-        console.log(difference)
     }, [allGroups, userGroups])
 
     return (

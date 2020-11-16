@@ -19,14 +19,19 @@ export default function Group({group, notOn}) {
     }, [])
     
     const subscribeToGroup = () => {
-        groupsDbRef.child(`${group}/members`).push({uid: user.user.uid})
-        usersGroupDbRef.push({groupKey: group})
+        groupsDbRef.child(`${group}/members/${user.user.uid}`).set({uid: user.user.uid})
+        usersGroupDbRef.child(group).set({groupKey: group})
     }
 
     const deSubscribeToGroup = () => {
         //query to find the right member under the current group and delete
-
+        groupsDbRef.child(`${group}/members/${user.user.uid}`).remove()
+            .then(() => {console.log("Removed Successfully")})
+            .catch((e) => {console.log("Remove Failed" + e.message)})
         //query to find the right group under the current member and delete
+        usersGroupDbRef.child(group).remove()
+            .then(() => {console.log("Removed Successfully")})
+            .catch((e) => {console.log("Remove Failed" + e.message)})
     }
 
     const changeCurrentGroup = () => {
