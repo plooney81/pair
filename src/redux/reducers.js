@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { ADD_NEW_USER_GROUP, SET_ALL_USERS_GROUPS, SET_LOGIN, SET_LOGOUT, SET_MESSAGES, SET_READ_ERROR, SET_WRITE_ERROR } from "./action";
+import { ADD_NEW_USER_GROUP, SET_ALL_POSSIBLE_GROUPS, SET_ALL_USERS_GROUPS, SET_CURRENT_CHAT, SET_LOGIN, SET_LOGOUT, SET_MESSAGES, SET_READ_ERROR, SET_WRITE_ERROR } from "./action";
 
 
 const userReducer = (state=[], action) => {
@@ -51,11 +51,29 @@ const userGroupReducer = (state=[], action) => {
     }
 }
 
+const allGroupReducer = (state=[], action) => {
+    switch (action.type){
+        case SET_ALL_POSSIBLE_GROUPS:
+            return action.payload.groups;
+        default: return state
+    }
+}
+
+const setCurrentChat = (state='', action) => {
+    switch (action.type) {
+        case SET_CURRENT_CHAT:
+            return action.payload.chat;
+        default: return state
+    }
+}
+
 
 export const rootReducer = combineReducers({
     user: userReducer,
     readError: readErrorReducer,
     writeError: writeErrorReducer,
     messages: setMessagesReducer,
-    userGroups: userGroupReducer
+    userGroups: userGroupReducer,
+    allGroups: allGroupReducer,
+    currentChatGroup: setCurrentChat
 })

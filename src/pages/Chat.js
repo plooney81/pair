@@ -7,22 +7,22 @@ import SideBar from '../components/SideBar';
 import Messages from '../components/Messages';
 import './Chat.css';
 import MessageForm from '../components/MessageForm';
-import { setMessagesAction, setUsersGroupsList } from '../redux/action';
+import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList, readError } from '../redux/action';
 
 
 export default function Chat() {
 const user = useSelector(state => state.user)
 const messages = useSelector(state => state.messages)
-const [readError, setReadError] = useState(null);
+const currentGroup = useSelector(state => state.currentChatGroup)
 const dispatch = useDispatch()
 
 
 const messagesDbRef = db.ref("messages");
-//TODO This will eventually need to change depending on what group the user has currently clicked on
-//TODO needs to be in the redux store eventually
-const groupRef = `group1`
+
+const groupRef = currentGroup
 
 const usersGroupDbRef = db.ref(`users/${user.user.uid}/groups`);
+const allGroupsDbRef = db.ref(`groups`);
 
 useEffect(() => {
     //! references to the chats path in the DB
@@ -45,12 +45,20 @@ useEffect(() => {
     usersGroupDbRef.on('value', (groups) => {
         const newGroupArray = [];
         groups.forEach((group) => {
-            newGroupArray.push(group.val());
+            newGroupArray.push(group.child('groupKey').val());
         })
-        dispatch(setUsersGroupsList(newGroupArray))
+        dispatch(setUsersGroupsList(newGroupArray));
     })
 
-}, [])
+    //! Get all of the available groups in the channel
+    allGroupsDbRef.on('value', (groups) => {
+        const allGroupArray = [];
+        groups.forEach((group) => {
+            allGroupArray.push(group.key);
+        })
+        dispatch(setAllPossibleGroups(allGroupArray));
+    })
+}, [groupRef])
 
     return (
         <div className="d-flex" >
