@@ -26,26 +26,31 @@ export default function NavigationBar() {
     }
     return (
         <Navbar bg="dark" variant="dark" className='navbar'>
-            <Navbar.Brand><NavLink to="/">Navbar</NavLink></Navbar.Brand>
+            <Navbar.Brand><NavLink to="/">Pair</NavLink></Navbar.Brand>
             <Nav className="mr-auto">
             <Nav.Link>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/" className="navbar-link">
+                    Home
+                </NavLink>
             </Nav.Link>
             <Nav.Link>
-                <NavLink to="/signup">Signup</NavLink>
+                <NavLink to="/signup" className="navbar-link">
+                    Signup
+                </NavLink>
             </Nav.Link>
             <Nav.Link>
-                <NavLink to="/login">Login</NavLink>
+                <NavLink to="/login" className="navbar-link">
+                    Login
+                </NavLink>
             </Nav.Link>
             <Nav.Link>
-                <NavLink to="/chat">Chat</NavLink>
-            </Nav.Link>
-            <Nav.Link>
-                <NavLink to="/profile">Profile</NavLink>
+                <NavLink to="/chat" className="navbar-link">
+                    Chat
+                </NavLink>
             </Nav.Link>
             </Nav>
             <Form inline onSubmit={signOut}>
-                <Button variant="outline-info" type="submit" style={{color: '#fafafa', borderColor: '#fafafa'}}>Sign Out</Button>
+                <Button variant="outline-info" className="sign-out" type="submit" style={{color: '#fafafa', borderColor: '#fafafa'}}>Sign Out</Button>
             </Form>
         </Navbar>
     )

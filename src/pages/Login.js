@@ -23,7 +23,7 @@ export default function Login() {
         setPassword('');
         await signin(email, password)
             .then((res) => {
-                signInFunction(res)
+                signInFunction(res.user)
                     .then(returnData => {
                         dispatch(login(returnData))
                         history.push(chatLocation)
@@ -37,7 +37,7 @@ export default function Login() {
     const googleSignIn = async () => {
         await signInWithGoogle()
         .then((res) => {
-            signInFunction(res)
+            signInFunction(res.user)
                 .then(returnData => {
                     dispatch(login(returnData))
                     history.push(chatLocation)
@@ -51,7 +51,8 @@ export default function Login() {
     const gitHubSignIn = async () => {
         await signInWithGitHub()
             .then((res) => {
-                signInFunction(res)
+                
+                signInFunction(res.user)
                     .then(returnData => {
                         dispatch(login(returnData))
                         history.push(chatLocation)

@@ -27,7 +27,7 @@ export default function SignUp() {
         await signup(email, password)
             .then((res) => {
                 //! First argument is user data, the second is the group number they belong to
-                let userResponse = signUpFunction(res, 1)
+                let userResponse = signUpFunction(res.user)
                 if(userResponse === error){
                     dispatch(writeError(error))
                 }else{
@@ -46,7 +46,7 @@ export default function SignUp() {
         .then((res) => {
             //! First argument is user data, the second is the group number they belong to
             dispatch(login(res))
-            let userResponse = signUpFunction(res, 1)
+            let userResponse = signUpFunction(res.user)
             if(userResponse === error){
                 dispatch(writeError(error))
             }else{
@@ -65,7 +65,7 @@ export default function SignUp() {
         .then((res) => {
             //! First argument is user data, the second is the group number they belong to
             dispatch(login(res))
-            let userResponse = signUpFunction(res, 1)
+            let userResponse = signUpFunction(res.user)
             if(userResponse === error){
                 dispatch(writeError(error))
             }else{
