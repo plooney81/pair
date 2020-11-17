@@ -21,7 +21,7 @@ const messagesDbRef = db.ref("messages");
 
 const groupRef = currentGroup
 
-const usersGroupDbRef = db.ref(`users/${user.user.uid}/groups`);
+const usersGroupDbRef = db.ref(`users/${user.uid}/groups`);
 const allGroupsDbRef = db.ref(`groups`);
 
 useEffect(() => {
@@ -47,7 +47,9 @@ useEffect(() => {
         groups.forEach((group) => {
             newGroupArray.push(group.child('groupKey').val());
         })
-        dispatch(setUsersGroupsList(newGroupArray));
+        if(newGroupArray[0]){
+            dispatch(setUsersGroupsList(newGroupArray))
+        }
     })
 
     //! Get all of the available groups in the channel
@@ -65,7 +67,7 @@ useEffect(() => {
         <SideBar/>
         <Card style={{height: 'calc(100vh - 56px)', width: '70vw'}} className='chat-card'>
             <Card.Header className="d-flex justify-content-between">
-                <span>{user.user.displayName}</span>
+                <span>{user.displayName}</span>
                 <span>Chat Members</span>
             </Card.Header>
             <Card.Body className="d-flex flex-column">

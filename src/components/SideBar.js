@@ -32,13 +32,13 @@ export default function SideBar() {
             if(snapshot.exists()){
                 createNewGroup(n+1)
             }else{
-                //TODO create the new group with criteria: createdAt: , createdBy, id, name, and finally members;
+                //! create the new group with criteria: createdAt: , createdBy, id, name, and finally members;
                 groupsDbRef.child(`group${n}`).set({
                     createdAt: Date.now(),
-                    createdBy: user.user.uid,
+                    createdBy: user.uid,
                     id: `group${n}`,
                     name: text,
-                    members: {[user.user.uid]:{uid: user.user.uid}}
+                    members: {[user.uid]:{uid: user.uid}}
                 }, error => {
                     if(error){
                         dispatch(writeError(error))
@@ -46,8 +46,8 @@ export default function SideBar() {
                         dispatch(writeError('Successful'))
                     }
                 })
-                //TODO add the group to the person who created it list
-                const usersGroupDbRef = db.ref(`users/${user.user.uid}/groups`);
+                //! add the group to the person who created it list
+                const usersGroupDbRef = db.ref(`users/${user.uid}/groups`);
                 usersGroupDbRef.child(`group${n}`).set({groupKey: `group${n}`})
             }
         })

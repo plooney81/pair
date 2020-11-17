@@ -27,12 +27,12 @@ export default function SignUp() {
         await signup(email, password)
             .then((res) => {
                 //! First argument is user data, the second is the group number they belong to
-                dispatch(login(res))
                 let userResponse = signUpFunction(res, 1)
                 if(userResponse === error){
                     dispatch(writeError(error))
                 }else{
                     dispatch(writeError('Successful'))
+                    dispatch(login(userResponse))
                 }
                 history.push(chatLocation)
             })
@@ -51,6 +51,7 @@ export default function SignUp() {
                 dispatch(writeError(error))
             }else{
                 dispatch(writeError('Successful'))
+                dispatch(login(userResponse))
             }
             history.push(chatLocation)
         })
@@ -69,6 +70,7 @@ export default function SignUp() {
                 dispatch(writeError(error))
             }else{
                 dispatch(writeError('Successful'))
+                dispatch(login(userResponse))
             }
             history.push(chatLocation)
         })
@@ -98,9 +100,6 @@ export default function SignUp() {
                         {error}
                     </Form.Text>
                 )}
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
                 <div className="d-flex justify-content-around">
                     <Button variant="primary" type="submit">
                         Sign Up
