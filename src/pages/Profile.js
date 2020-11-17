@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
+import { storageRef } from '../services/firebase';
 
 export default function Profile() {
     const user = useSelector((state) => state.user)
@@ -8,8 +9,27 @@ export default function Profile() {
     const [displayName, setDisplayName] = useState(user.displayName)
     const [email, setEmail] = useState(user.email)
     const [photoURL, setPhotoURL] = useState(user.photoURL)
+    const [selectedFile, setSelectedFile] = useState(null);
     const handleSubmit = () => {
-        //
+        //! Send the photo to the storage reference
+        //? The reference is images/the logged in users id/profilePic
+        const uploadPic = storageRef.child(`images/${user.uid}/profilePic`).put(selectedFile)
+        //! first function is the state change observer
+        //! second is error handling
+        //! last is on successful completion
+        uploadPic.on('state_changed', (snapshot) => {
+            let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log(`${progress}% completed`)
+        }, (error) => {
+            console.log('Error: '+error)
+        }, async () => {
+            await uploadPic.snapshot.ref.getDownloadURL()
+                .then((downloadURL) => {
+                    setPhotoURL(downloadURL)
+                })
+        })
+        //TODO: Send all of the form data to the correct users info in the realtime db...look at the usersDbFunctions for some inspiration
+        
     }
     return (
         <>
@@ -31,12 +51,12 @@ export default function Profile() {
                         <div>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control type="text" value={email}/>
+                                <Form.Control type="text" value={email} onChange={(e) => {setEmail(e.target.value)}}/>
                             </Form.Group>
 
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Label>Display Name</Form.Label>
-                                <Form.Control type="text" value={displayName}/>
+                                <Form.Control type="text" value={displayName} onChange={(e) => {setDisplayName(e.target.value)}}/>
                                 <Form.Text className="text-muted">
                                 This could be a first name, a nickname, or really whatever.
                                 </Form.Text>
@@ -44,9 +64,9 @@ export default function Profile() {
                         </div>
                         <div className="ml-3 border">
                             <span>Profile Picture</span>
-                            <img href={`${user.photoURL}`} alt={`${user.displayName}'s profile`}/>
+                            <img src={`${photoURL}`} alt={`${user.displayName}'s profile`}/>
                             <Form.Group>
-                                <Form.File label="Upload an Image" />
+                                <Form.File label="Upload an Image" onChange={(e) => {setSelectedFile(e.target.files[0])}}/>
                             </Form.Group>
                         </div>
                     </Form>
@@ -60,8 +80,6 @@ export default function Profile() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
-            <img href={`${user.photoURL}`} alt={`${user.displayName}'s profile`}/>
         </>
     )
 }
