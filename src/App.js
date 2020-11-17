@@ -20,14 +20,14 @@ export default function App() {
       <NavigationBar/>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
           {Object.keys(user).length > 0 && (
             <>
               <Route path="/chat" component={Chat} />
               <Route path="/profile" component={Profile} />
             </>
           )}
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
           <Route>
             <Redirect to="/" />
           </Route>

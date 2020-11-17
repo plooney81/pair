@@ -14,7 +14,7 @@ export default function MessageForm() {
     const currentGroup = useSelector(state => state.currentChatGroup)
     const dispatch = useDispatch();
     const messages = db.ref().child("messages");
-    const primaryKey = `${currentGroup}/m${messagesArray.length}`;
+    const primaryKey = `${currentGroup.group}/m${messagesArray.length}`;
     const handleSubmit = (e) => {
         e.preventDefault();
         setContent('');
@@ -35,7 +35,7 @@ export default function MessageForm() {
     return (
         <Form onSubmit={handleSubmit} className="d-flex flex-column message-form" >
             <Form.Group>
-                <Form.Control className="text-input" type="text" placeholder="Message to @main-chat" value={content} onChange={(e)=>{setContent(e.target.value)}}></Form.Control>
+                <Form.Control className="text-input" type="text" placeholder={`Message to @${currentGroup.name}`} value={content} onChange={(e)=>{setContent(e.target.value)}}></Form.Control>
             </Form.Group>
             <div className="d-flex justify-content-between icons-group">
                 <div className="first-btn-group d-flex">

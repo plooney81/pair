@@ -59,7 +59,7 @@ const allGroupReducer = (state=[], action) => {
     }
 }
 
-const setCurrentChat = (state='', action) => {
+const setCurrentChat = (state={}, action) => {
     switch (action.type) {
         case SET_CURRENT_CHAT:
             return action.payload.chat;

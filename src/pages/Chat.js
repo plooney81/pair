@@ -19,7 +19,7 @@ const dispatch = useDispatch()
 
 const messagesDbRef = db.ref("messages");
 
-const groupRef = currentGroup
+const groupRef = currentGroup.group
 
 const usersGroupDbRef = db.ref(`users/${user.uid}/groups`);
 const allGroupsDbRef = db.ref(`groups`);
@@ -67,7 +67,7 @@ useEffect(() => {
         <SideBar/>
         <Card style={{height: 'calc(100vh - 56px)', width: '70vw'}} className='chat-card'>
             <Card.Header className="d-flex justify-content-between">
-                <span>{user.displayName}</span>
+                <span>{currentGroup.name}</span>
                 <Profile />
             </Card.Header>
             <Card.Body className="d-flex flex-column">

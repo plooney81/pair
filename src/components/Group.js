@@ -51,7 +51,7 @@ export default function Group({group, notOn}) {
                 </>
                 :
                 <>
-                    <span onClick={() => {dispatch(setCurrentChat(group))}}>{groupInfo.name}</span>
+                    <span onClick={() => {dispatch(setCurrentChat({group: group, name: groupInfo.name}))}}>{groupInfo.name}</span>
                     <FontAwesomeIcon icon={faMinusSquare} className='ml-2' onClick={deSubscribeToGroup}/>
                 </>
                 }
