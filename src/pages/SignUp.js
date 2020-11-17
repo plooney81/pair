@@ -98,9 +98,6 @@ export default function SignUp() {
                         {error}
                     </Form.Text>
                 )}
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
                 <div className="d-flex justify-content-around">
                     <Button variant="primary" type="submit">
                         Sign Up
