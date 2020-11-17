@@ -19,10 +19,10 @@ export default function MessageForm() {
         e.preventDefault();
         setContent('');
         messages.child(primaryKey).set({
-            name: user.user.displayName,
+            name: user.displayName,
             content,
             timeStamp: Date.now(),
-            uid: user.user.uid
+            uid: user.uid
         }, error => {
             if(error){
                 dispatch(writeError(error))

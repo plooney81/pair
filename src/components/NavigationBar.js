@@ -40,6 +40,9 @@ export default function NavigationBar() {
             <Nav.Link>
                 <NavLink to="/chat">Chat</NavLink>
             </Nav.Link>
+            <Nav.Link>
+                <NavLink to="/profile">Profile</NavLink>
+            </Nav.Link>
             </Nav>
             <Form inline onSubmit={signOut}>
                 <Button variant="outline-info" type="submit" style={{color: '#fafafa', borderColor: '#fafafa'}}>Sign Out</Button>

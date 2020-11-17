@@ -23,9 +23,11 @@ export default function Login() {
         setPassword('');
         await signin(email, password)
             .then((res) => {
-                dispatch(login(res))
-                signInFunction(res);
-                history.push(chatLocation)
+                signInFunction(res)
+                    .then(returnData => {
+                        dispatch(login(returnData))
+                        history.push(chatLocation)
+                    })
             })
             .catch((error) => {
                 setError(error.message);
@@ -35,9 +37,11 @@ export default function Login() {
     const googleSignIn = async () => {
         await signInWithGoogle()
         .then((res) => {
-            dispatch(login(res))
-            signInFunction(res);
-            history.push(chatLocation)
+            signInFunction(res)
+                .then(returnData => {
+                    dispatch(login(returnData))
+                    history.push(chatLocation)
+                })
         })
         .catch((error) => {
             setError(error.message);
@@ -46,14 +50,16 @@ export default function Login() {
 
     const gitHubSignIn = async () => {
         await signInWithGitHub()
-        .then((res) => {
-            dispatch(login(res))
-            signInFunction(res)
-            history.push(chatLocation)
-        })
-        .catch((error) => {
-            setError(error.message);
-        })
+            .then((res) => {
+                signInFunction(res)
+                    .then(returnData => {
+                        dispatch(login(returnData))
+                        history.push(chatLocation)
+                    })
+            })
+            .catch((error) => {
+                setError(error.message);
+            })
     }
 
     return (

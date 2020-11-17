@@ -5,6 +5,7 @@ const usersDbRef = db.ref("users");
 //? Second parameter is the initial group the user is added too.
 export const signUpFunction = (userData, groupNumber=1) => {
     const {displayName, photoURL, email, uid} = userData.user;
+    const returnData = {displayName, photoURL, email, uid};
     usersDbRef.child(`${uid}`).set({
         displayName,
         photoURL,
@@ -18,17 +19,18 @@ export const signUpFunction = (userData, groupNumber=1) => {
             return `Successful`
         }
     })
+    return returnData
 }
 
 //? Function that first checks to see if the current UserId is in the db. 
 //? If it isn't then it adds it, calling our function from above, if it does already exist, then we don't do anything.
 export const signInFunction = (userData) => {
     const { uid } = userData.user;
-    usersDbRef.child(uid).once("value")
+    return usersDbRef.child(uid).once("value")
         .then((snapshot) => {
             // //! exists() method is part of the snapshot object which is returned by firebase queries
             if(snapshot.exists()){
-                console.log('exists');
+                return snapshot.val()
             }else{
                 signUpFunction(userData);
             }
