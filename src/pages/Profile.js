@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../redux/action';
 import { storageRef } from '../services/firebase';
+import { signUpFunction } from '../services/usersDbFunctions';
 
 export default function Profile() {
     const user = useSelector((state) => state.user)
@@ -10,6 +12,7 @@ export default function Profile() {
     const [email, setEmail] = useState(user.email)
     const [photoURL, setPhotoURL] = useState(user.photoURL)
     const [selectedFile, setSelectedFile] = useState(null);
+    const dispatch = useDispatch();
     const handleSubmit = () => {
         //! Send the photo to the storage reference
         //? The reference is images/the logged in users id/profilePic
@@ -28,15 +31,30 @@ export default function Profile() {
                     setPhotoURL(downloadURL)
                 })
         })
-        //TODO: Send all of the form data to the correct users info in the realtime db...look at the usersDbFunctions for some inspiration
-        
+        //! Send all of the form data to the correct users info in the realtime db...look at the usersDbFunctions for some inspiration
+        //! We can actually reuse the signUpFunction from our usersDbFunction if we send the data in the right way...i.e. an object
+        const newUserSave = {
+            displayName, 
+            photoURL: photoURL, 
+            email, 
+            uid: user.uid, 
+            groups: user.userGroups
+        }
+        console.log(user)
+        console.log(newUserSave)
+        signUpFunction(newUserSave);
+        dispatch(login(newUserSave))
+        setShow(false);
+    }
+
+    const imgStyling = {
+        height: '40px',
+        borderRadius: '.25rem',
+        cursor: 'pointer',
     }
     return (
         <>
-            <Button variant="primary" onClick={() => {setShow(true)}}>
-                Launch static backdrop modal
-            </Button>
-
+            <img src={`${photoURL}`} alt={`${user.displayName}'s profile`} onClick={() => {setShow(true)}} style={imgStyling} />
             <Modal
                 show={show}
                 onHide={() => {setShow(false)}}
@@ -64,9 +82,9 @@ export default function Profile() {
                         </div>
                         <div className="ml-3 border">
                             <span>Profile Picture</span>
-                            <img src={`${photoURL}`} alt={`${user.displayName}'s profile`}/>
+                            <img src={`${photoURL}`} alt={`${user.displayName}'s profile`} style={{height: '100px'}}/>
                             <Form.Group>
-                                <Form.File label="Upload an Image" onChange={(e) => {setSelectedFile(e.target.files[0])}}/>
+                                <Form.File onChange={(e) => {setSelectedFile(e.target.files[0])}}/>
                             </Form.Group>
                         </div>
                     </Form>
