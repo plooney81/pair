@@ -36,10 +36,6 @@ export default function Group({group, notOn}) {
             .catch((e) => {console.log("Remove Failed" + e.message)})
     }
 
-    const changeCurrentGroup = () => {
-        dispatch(setCurrentChat(group))
-    }
-
     return (
         <>
         {(groupInfo) && (
@@ -51,7 +47,7 @@ export default function Group({group, notOn}) {
                 </>
                 :
                 <>
-                    <span onClick={changeCurrentGroup}>{groupInfo.name}</span>
+                    <span onClick={() => {dispatch(setCurrentChat(group))}}>{groupInfo.name}</span>
                     <FontAwesomeIcon icon={faMinusSquare} className='ml-2' onClick={deSubscribeToGroup}/>
                 </>
                 }

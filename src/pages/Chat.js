@@ -7,14 +7,13 @@ import SideBar from '../components/SideBar';
 import Messages from '../components/Messages';
 import './Chat.css';
 import MessageForm from '../components/MessageForm';
-import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList } from '../redux/action';
+import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList, readError } from '../redux/action';
 
 
 export default function Chat() {
 const user = useSelector(state => state.user)
 const messages = useSelector(state => state.messages)
 const currentGroup = useSelector(state => state.currentChatGroup)
-const [readError, setReadError] = useState(null);
 const dispatch = useDispatch()
 
 
