@@ -37,38 +37,35 @@ export default function MessageForm() {
     const pickEmoji = (e) => {
         setContent(content + ' ' + e.native)
     }
-    const showEmojis = (e) => {
+    const showEmojis = () => {
         setShowEmoji(!showEmoji)
     }
 
     return (
-        <Form onSubmit={handleSubmit} className="d-flex flex-column message-form" >
-            <Form.Group>
-                <Form.Control className="text-input" type="text" placeholder={`Message to @${currentGroup.name}`} value={content} onChange={(e)=>{setContent(e.target.value)}}></Form.Control>
-            </Form.Group>
-            <div className="d-flex justify-content-between icons-group">
-                <div className="first-btn-group d-flex">
-                    <FontAwesomeIcon icon={faLightbulb}/>
-                    <FontAwesomeIcon icon={faBold}/>
-                    <FontAwesomeIcon icon={faItalic}/>
-                    <FontAwesomeIcon icon={faStrikethrough}/>
-                    <FontAwesomeIcon icon={faCode}/>
-                    <FontAwesomeIcon icon={faLink}/>
+        <div>
+            {showEmoji && (
+                <Picker className="emoji-picker" onSelect={pickEmoji} style={{width: '60vw'}}/>
+            )}
+            <Form onSubmit={handleSubmit} className="d-flex flex-column message-form" >
+                <Form.Group>
+                    <Form.Control className="text-input" type="text" placeholder={`Message to @${currentGroup.name}`} value={content} onChange={(e)=>{setContent(e.target.value)}}></Form.Control>
+                </Form.Group>
+                <div className="d-flex justify-content-between icons-group">
+                    <div className="first-btn-group d-flex">
+                        <FontAwesomeIcon icon={faLightbulb}/>
+                        <FontAwesomeIcon icon={faBold}/>
+                        <FontAwesomeIcon icon={faItalic}/>
+                        <FontAwesomeIcon icon={faStrikethrough}/>
+                        <FontAwesomeIcon icon={faCode}/>
+                        <FontAwesomeIcon icon={faLink}/>
+                    </div>
+                    <div className="first-btn-group d-flex">
+                        <FontAwesomeIcon icon={faPaperclip}/>
+                        <FontAwesomeIcon icon={faSmileBeam} onClick={showEmojis}/>
+                        <FontAwesomeIcon icon={faPaperPlane} onClick={handleSubmit}/>
+                    </div>
                 </div>
-                <div className="first-btn-group d-flex">
-                    <FontAwesomeIcon icon={faPaperclip}/>
-                    {showEmoji ? (
-                        <div className="d-flex flex-column">
-                            <FontAwesomeIcon icon={faSmileBeam} onClick={showEmojis}/>
-                            <Picker className="emoji-picker" onSelect={pickEmoji}/>
-                        </div>
-                    ) : (
-                    <FontAwesomeIcon icon={faSmileBeam} onClick={showEmojis}/>
-                    )}
-                    
-                    <FontAwesomeIcon icon={faPaperPlane} onClick={handleSubmit}/>
-                </div>
-            </div>
-        </Form>
+            </Form>
+        </div>
     )
 }

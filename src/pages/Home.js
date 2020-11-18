@@ -5,7 +5,7 @@ export default function Home() {
     return (
         <div>
             <div className="d-flex justify-content-center">
-                <img src={pairLogoGif} alt="Pair Logo gif"/>
+                <img src={pairLogoGif} alt="Pair Logo gif" style={{borderRadius: '.25rem'}} className="mt-5 logo-gif"/>
             </div>
             <div className="d-flex flex-column align-items-center">
                 <h1>Welcome to Pair</h1>

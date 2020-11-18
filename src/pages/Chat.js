@@ -70,11 +70,13 @@ useEffect(() => {
                 <span>{currentGroup.name}</span>
                 <Profile />
             </Card.Header>
-            <Card.Body className="d-flex flex-column align-items-stretch">
-                {messages.map((message, index) => {
-                    return <Messages key={index} message={message}/>
-                })}
-                <MessageForm className="align-self-end mb-3"></MessageForm>
+            <Card.Body className="d-flex flex-column">
+                <div className="d-flex flex-column align-items-stretch mb-3" style={{height: '100vh', overflow: 'auto'}}>
+                    {messages.map((message, index) => {
+                        return <Messages key={index} message={message}/>
+                    })}
+                </div>
+                <MessageForm className="mb-3"></MessageForm>
             </Card.Body>
         </Card>
         </div>
