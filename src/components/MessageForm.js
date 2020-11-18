@@ -1,14 +1,17 @@
 import { faBold, faCode, faItalic, faLightbulb, faLink, faPaperclip, faPaperPlane, faSmileBeam, faStrikethrough } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Picker } from 'emoji-mart';
 import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { writeError } from '../redux/action';
 import { db } from '../services/firebase';
 import './MessageForm.css';
+import 'emoji-mart/css/emoji-mart.css';
 
 export default function MessageForm() {
     const [content, setContent] = useState('');
+    const [showEmoji, setShowEmoji] = useState(false);
     const messagesArray = useSelector(state => state.messages)
     const user = useSelector(state => state.user)
     const currentGroup = useSelector(state => state.currentChatGroup)
@@ -31,6 +34,12 @@ export default function MessageForm() {
             }
         })
     }
+    const pickEmoji = (e) => {
+        setContent(content + ' ' + e.native)
+    }
+    const showEmojis = (e) => {
+        setShowEmoji(!showEmoji)
+    }
 
     return (
         <Form onSubmit={handleSubmit} className="d-flex flex-column message-form" >
@@ -48,7 +57,15 @@ export default function MessageForm() {
                 </div>
                 <div className="first-btn-group d-flex">
                     <FontAwesomeIcon icon={faPaperclip}/>
-                    <FontAwesomeIcon icon={faSmileBeam}/>
+                    {showEmoji ? (
+                        <div className="d-flex flex-column">
+                            <FontAwesomeIcon icon={faSmileBeam} onClick={showEmojis}/>
+                            <Picker className="emoji-picker" onSelect={pickEmoji}/>
+                        </div>
+                    ) : (
+                    <FontAwesomeIcon icon={faSmileBeam} onClick={showEmojis}/>
+                    )}
+                    
                     <FontAwesomeIcon icon={faPaperPlane} onClick={handleSubmit}/>
                 </div>
             </div>
