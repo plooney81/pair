@@ -5,6 +5,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { logout } from '../redux/action';
 import { auth } from '../services/firebase';
 import './NavigationBar.css';
+import pairLogo from '../img/pair_logo.svg';
 
 export default function NavigationBar() {
     const isLoggedIn = useSelector(state => state)
@@ -26,7 +27,9 @@ export default function NavigationBar() {
     }
     return (
         <Navbar bg="dark" variant="dark" className='navbar'>
-            <Navbar.Brand><NavLink to="/">Pair</NavLink></Navbar.Brand>
+            <Navbar.Brand><NavLink to="/">
+                <img src={pairLogo} className="pair-logo" alt="pair logo" />
+            </NavLink></Navbar.Brand>
             <Nav className="mr-auto">
             <Nav.Link>
                 <NavLink to="/" className="navbar-link">

@@ -11,3 +11,10 @@
 .message-card.notuser{
     background-color: var(--shades)!important;
 }
+
+.emoji-picker{
+    position: "absolute";
+    bottom: 10;
+    right: 0;
+    float: right;
+}
