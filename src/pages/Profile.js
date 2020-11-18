@@ -6,7 +6,7 @@ import { storageRef } from '../services/firebase';
 import { signUpFunction } from '../services/usersDbFunctions';
 
 export default function Profile() {
-    const user = useSelector((state) => state.user)
+    const {user} = useSelector((state) => state.user)
     const [show, setShow] = useState(false);
     const [displayName, setDisplayName] = useState(user.displayName)
     const [email, setEmail] = useState(user.email)

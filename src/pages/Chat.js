@@ -11,7 +11,7 @@ import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList, readError 
 import Profile from './Profile';
 
 export default function Chat() {
-const user = useSelector(state => state.user)
+const {user} = useSelector(state => state.user)
 const messages = useSelector(state => state.messages)
 const currentGroup = useSelector(state => state.currentChatGroup)
 const dispatch = useDispatch()
@@ -70,7 +70,7 @@ useEffect(() => {
                 <span>{currentGroup.name}</span>
                 <Profile />
             </Card.Header>
-            <Card.Body className="d-flex flex-column">
+            <Card.Body className="d-flex flex-column align-items-stretch">
                 {messages.map((message, index) => {
                     return <Messages key={index} message={message}/>
                 })}

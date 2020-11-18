@@ -5,7 +5,7 @@ import './Messages.css';
 import {pairLogoURL} from '../services/usersDbFunctions';
 
 export default function Messages({message}) {
-    const user = useSelector(state => state.user)
+    const {user} = useSelector(state => state.user)
     const [messageImgURL , setMessageImgURL ] = useState('');
     const isCurrentUser = message.uid === user.uid
     const time = new Date(message.timeStamp)

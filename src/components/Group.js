@@ -9,7 +9,7 @@ import './Group.css';
 export default function Group({group, notOn}) {
     const[groupInfo, setGroupInfo] = useState({})
     const groupsDbRef = db.ref("groups")
-    const user = useSelector((state) => state.user)
+    const {user} = useSelector((state) => state.user)
     const usersGroupDbRef = db.ref(`users/${user.uid}/groups`);
     const dispatch = useDispatch();
     useEffect(() => {

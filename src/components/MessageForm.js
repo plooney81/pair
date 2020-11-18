@@ -13,7 +13,7 @@ export default function MessageForm() {
     const [content, setContent] = useState('');
     const [showEmoji, setShowEmoji] = useState(false);
     const messagesArray = useSelector(state => state.messages)
-    const user = useSelector(state => state.user)
+    const {user} = useSelector(state => state.user)
     const currentGroup = useSelector(state => state.currentChatGroup)
     const dispatch = useDispatch();
     const messages = db.ref().child("messages");

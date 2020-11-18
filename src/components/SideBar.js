@@ -13,7 +13,7 @@ export default function SideBar() {
     const [differenceArray, setDifferenceArray] = useState([]);
     const userGroups = useSelector((state) => state.userGroups);
     const allGroups = useSelector((state) => state.allGroups);
-    const user = useSelector((state) => state.user);
+    const {user} = useSelector((state) => state.user);
     const groupsDbRef = db.ref("groups");
     const dispatch = useDispatch()
 

@@ -2,12 +2,15 @@ import { combineReducers } from "redux";
 import { ADD_NEW_USER_GROUP, SET_ALL_POSSIBLE_GROUPS, SET_ALL_USERS_GROUPS, SET_CURRENT_CHAT, SET_LOGIN, SET_LOGOUT, SET_MESSAGES, SET_READ_ERROR, SET_WRITE_ERROR } from "./action";
 
 
-const userReducer = (state=[], action) => {
+const userReducer = (state={checked: false, user:null}, action) => {
     switch (action.type){
         case SET_LOGIN:
-            return action.payload.userInfo;
+            return {
+                checked: true,
+                user: action.payload.userInfo,
+            };
         case SET_LOGOUT:
-            return [];
+            return {checked: true, user:null};
         default:
             return state;
     }
