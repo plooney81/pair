@@ -64,7 +64,7 @@ export default function Login() {
     }
 
     return (
-        <Container className="mt-5">
+        <Container className="mt-5 signup-form-container">
             <h1>Login</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
@@ -84,10 +84,7 @@ export default function Login() {
                         {error}
                     </Form.Text>
                 )}
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
-                <div className="d-flex justify-content-around">
+                <div className="d-flex justify-content-around mb-3">
                     <Button variant="primary" type="submit">
                         Login
                     </Button>
@@ -101,7 +98,7 @@ export default function Login() {
                         <span className="m-2">Sign in with GitHub</span>
                     </Button>
                 </div>
-                <Form.Text className="danger mt-3">
+                <Form.Text className="danger pb-3">
                     Don't have an account? <Link to='/signup'>Sign up</Link>
                 </Form.Text>
             </Form>

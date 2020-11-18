@@ -10,6 +10,8 @@ import { useDispatch } from 'react-redux';
 import { login, writeError } from '../redux/action';
 import { signUpFunction } from '../services/usersDbFunctions';
 
+import './SignUp.css';
+
 export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -80,7 +82,7 @@ export default function SignUp() {
     }
 
     return (
-        <Container className="mt-5">
+        <Container className="mt-5 signup-form-container">
             <h1>Sign Up</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
@@ -100,21 +102,21 @@ export default function SignUp() {
                         {error}
                     </Form.Text>
                 )}
-                <div className="d-flex justify-content-around">
-                    <Button variant="primary" type="submit">
+                <div className="d-flex justify-content-around mb-3">
+                    <Button type="submit" className='signup-button'>
                         Sign Up
                     </Button>
                     <Button variant="primary" onClick={googleSignIn} style={{padding: '0'}}>
                         <img src={googleLogo} alt="Google Logo"></img>
-                        <span className="m-2">Sign Up with Google</span>
+                        <span className="m-2">Sign up with Google</span>
                     </Button>
                     <Button variant="primary" onClick={gitHubSignIn} 
                     style={{padding: '0', backgroundColor: '#f5f5f5', color: "#333", borderColor: '#333'}}>
                         <img src={githubLogo} alt="GitHub Logo" className="ml-1"></img>
-                        <span className="m-2">Sign Up with GitHub</span>
+                        <span className="m-2">Sign up with GitHub</span>
                     </Button>
                 </div>
-                <Form.Text className="danger mt-3">
+                <Form.Text className="danger pb-3">
                     Already have an account? <Link to='/login'>Sign in</Link>
                 </Form.Text>
             </Form>
