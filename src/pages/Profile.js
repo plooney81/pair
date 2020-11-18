@@ -25,26 +25,26 @@ export default function Profile() {
             console.log(`${progress}% completed`)
         }, (error) => {
             console.log('Error: '+error)
-        }, async () => {
-            await uploadPic.snapshot.ref.getDownloadURL()
+        }, () => {
+            uploadPic.snapshot.ref.getDownloadURL()
                 .then((downloadURL) => {
                     setPhotoURL(downloadURL)
+                    //! Send all of the form data to the correct users info in the realtime db...look at the usersDbFunctions for some inspiration
+                    //! We can actually reuse the signUpFunction from our usersDbFunction if we send the data in the right way...i.e. an object
+                    const newUserSave = {
+                        displayName, 
+                        photoURL: downloadURL, 
+                        email, 
+                        uid: user.uid, 
+                        groups: user.userGroups
+                    }
+                    console.log(user)
+                    console.log(newUserSave)
+                    signUpFunction(newUserSave);
+                    dispatch(login(newUserSave))
+                    setShow(false);
                 })
         })
-        //! Send all of the form data to the correct users info in the realtime db...look at the usersDbFunctions for some inspiration
-        //! We can actually reuse the signUpFunction from our usersDbFunction if we send the data in the right way...i.e. an object
-        const newUserSave = {
-            displayName, 
-            photoURL: photoURL, 
-            email, 
-            uid: user.uid, 
-            groups: user.userGroups
-        }
-        console.log(user)
-        console.log(newUserSave)
-        signUpFunction(newUserSave);
-        dispatch(login(newUserSave))
-        setShow(false);
     }
 
     const imgStyling = {

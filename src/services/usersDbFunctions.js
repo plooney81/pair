@@ -1,10 +1,13 @@
 import { db } from './firebase';
 const usersDbRef = db.ref("users");
+export const pairLogoURL = 'https://firebasestorage.googleapis.com/v0/b/react-solo-project-pl.appspot.com/o/images%2Fdefault%2Fpair_logo.svg?alt=media&token=57fe59c4-2d31-4c3e-ba94-25872cc5b41f'
 
 //? First parameter is the user data which we grab certain portions of and put them in the new user node
 //? Second parameter is the initial group the user is added too.
 export const signUpFunction = (userData) => {
-    const {displayName, photoURL, email, uid} = userData;
+    const {displayName, email, uid} = userData;
+    let photoURL = userData.photoURL
+    photoURL = photoURL ? photoURL : pairLogoURL;
     const returnData = {displayName, photoURL, email, uid};
     usersDbRef.child(`${uid}`).set({
         displayName,

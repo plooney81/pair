@@ -6,6 +6,7 @@
 
 .message-card.user{
     background-color: var(--main)!important;
+    
 }
 
 .message-card.notuser{
