@@ -2,7 +2,7 @@ import { faMinusSquare, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCurrentChat } from '../redux/action'
+import { setCurrentChat, setSideBarShow } from '../redux/action'
 import { db } from '../services/firebase'
 import './Group.css';
 
@@ -39,6 +39,10 @@ export default function Group({group, notOn}) {
             .then(() => {console.log("Removed Successfully")})
             .catch((e) => {console.log("Remove Failed" + e.message)})
     }
+    const handleGroupChoose = () => {
+        dispatch(setCurrentChat({group: group, name: groupInfo.name}))
+        dispatch(setSideBarShow(false))
+    }
 
     return (
         <>
@@ -51,7 +55,7 @@ export default function Group({group, notOn}) {
                 </>
                 :
                 <>
-                    <span onClick={() => {dispatch(setCurrentChat({group: group, name: groupInfo.name}))}}>{groupInfo.name}</span>
+                    <span onClick={handleGroupChoose}>{groupInfo.name}</span>
                     <FontAwesomeIcon icon={faMinusSquare} className='ml-2' onClick={deSubscribeToGroup}/>
                 </>
                 }

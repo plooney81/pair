@@ -7,22 +7,23 @@ import SideBar from '../components/SideBar';
 import Messages from '../components/Messages';
 import './Chat.css';
 import MessageForm from '../components/MessageForm';
-import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList, readError } from '../redux/action';
+import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList, readError, setSideBarShow } from '../redux/action';
 import Profile from './Profile';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 export default function Chat() {
-const {user} = useSelector(state => state.user)
-const messages = useSelector(state => state.messages)
-const currentGroup = useSelector(state => state.currentChatGroup)
-const dispatch = useDispatch()
-
-
+const {user} = useSelector(state => state.user);
+const messages = useSelector(state => state.messages);
+const currentGroup = useSelector(state => state.currentChatGroup);
+const dispatch = useDispatch();
+// const [showSideBar, setShowSideBar] = useState(false);
+const showSideBar = useSelector(state => state.sideBarShow);
 const messagesDbRef = db.ref("messages");
-
-const groupRef = currentGroup.group
-
+const groupRef = currentGroup.group;
 const usersGroupDbRef = db.ref(`users/${user.uid}/groups`);
 const allGroupsDbRef = db.ref(`groups`);
+
 
 useEffect(() => {
     //! references to the chats path in the DB
@@ -61,17 +62,26 @@ useEffect(() => {
         dispatch(setAllPossibleGroups(allGroupArray));
     })
 }, [groupRef])
-
     return (
-        <div className="d-flex" >
-        <SideBar/>
-        <Card style={{height: 'calc(100vh - 56px)', width: '70vw'}} className='chat-card'>
+        <div className="d-flex">
+            {showSideBar 
+                ? (
+                    <>
+                    <Button onClick={() => {dispatch(setSideBarShow(false))}} className="hide-side-button"><FontAwesomeIcon icon={faBars} className="icon" /></Button>
+                    <SideBar/>
+                    </>
+                )
+                : (
+                    <Button onClick={() => {dispatch(setSideBarShow(true))}} className="hide-side-button"><FontAwesomeIcon icon={faBars} className="icon"/></Button>
+                )
+            }
+        <Card style={{height: 'calc(100vh - 76px)', width: '100%'}} className='chat-card'>
             <Card.Header className="d-flex justify-content-between">
                 <span>{currentGroup.name}</span>
                 <Profile />
             </Card.Header>
-            <Card.Body className="d-flex flex-column">
-                <div className="d-flex flex-column align-items-stretch mb-3" style={{height: '100vh', overflow: 'auto'}}>
+            <Card.Body className="d-flex flex-column align-items-center messages-card-body">
+                <div className="d-flex flex-column align-items-stretch mb-3" style={{height: '100vh', width: '100%', overflow: 'auto'}}>
                     {messages.map((message, index) => {
                         return <Messages key={index} message={message}/>
                     })}

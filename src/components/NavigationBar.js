@@ -6,6 +6,7 @@ import { logout } from '../redux/action';
 import { auth } from '../services/firebase';
 import './NavigationBar.css';
 import pairLogo from '../img/pair_logo.svg';
+import NavbarToggle from 'react-bootstrap/esm/NavbarToggle';
 
 export default function NavigationBar() {
     const isLoggedIn = useSelector(state => state)
@@ -26,35 +27,39 @@ export default function NavigationBar() {
             })
     }
     return (
-        <Navbar bg="dark" variant="dark" className='navbar'>
-            <Navbar.Brand><NavLink to="/">
-                <img src={pairLogo} className="pair-logo" alt="pair logo" />
-            </NavLink></Navbar.Brand>
-            <Nav className="mr-auto">
-            <Nav.Link>
-                <NavLink to="/" className="navbar-link">
-                    Home
-                </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-                <NavLink to="/signup" className="navbar-link">
-                    Signup
-                </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-                <NavLink to="/login" className="navbar-link">
-                    Login
-                </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-                <NavLink to="/chat" className="navbar-link">
-                    Chat
-                </NavLink>
-            </Nav.Link>
-            </Nav>
-            <Form inline onSubmit={signOut}>
-                <Button variant="outline-info" className="sign-out" type="submit" style={{color: '#fafafa', borderColor: '#fafafa'}}>Sign Out</Button>
-            </Form>
+        <Navbar bg="dark" variant="dark" className='navbar' expand='md' >
+                <Navbar.Brand><NavLink to="/">
+                    <img src={pairLogo} className="pair-logo" alt="pair logo" />
+                </NavLink></Navbar.Brand>
+            <Navbar.Toggle/>
+            <Navbar.Collapse >
+                <Nav className="mr-auto">
+                <Nav.Link>
+                    <NavLink to="/" className="navbar-link">
+                        Home
+                    </NavLink>
+                </Nav.Link>
+                <Nav.Link>
+                    <NavLink to="/signup" className="navbar-link">
+                        Signup
+                    </NavLink>
+                </Nav.Link>
+                <Nav.Link>
+                    <NavLink to="/login" className="navbar-link">
+                        Login
+                    </NavLink>
+                </Nav.Link>
+                <Nav.Link>
+                    <NavLink to="/chat" className="navbar-link">
+                        Chat
+                    </NavLink>
+                </Nav.Link>
+                </Nav>
+                <Form inline onSubmit={signOut}>
+                    <Button variant="outline-info" className="sign-out" type="submit" style={{color: '#fafafa', borderColor: '#fafafa'}}>Sign Out</Button>
+                </Form>
+
+            </Navbar.Collapse>
         </Navbar>
     )
 }

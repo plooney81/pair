@@ -5,3 +5,7 @@
     --darkAccent: #BF7968;
     --shades: #484c56;
 }
+
+.card{
+    border-radius: 0!important;
+}

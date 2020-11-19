@@ -54,9 +54,9 @@ export default function SideBar() {
     }
 
     return (
-        <div style={{width: '30vw'}}>
-            <Card style={{height: 'calc(100vh - 56px)', width: '30vw', overflow: 'auto'}} className="sidebar-card">
-                <Card.Header>Channel</Card.Header>
+        <div className="totalSidebar">
+            <Card style={{height: '100%', width: '100%', overflow: 'auto'}} className="sidebar-card">
+                <Card.Header style={{height: `64px`}}>Channel</Card.Header>
                 <Card.Body>
                     <Card.Text>
                         <h3>Current Groups</h3>
@@ -87,7 +87,7 @@ export default function SideBar() {
                                     placeholder="Something Fun" 
                                     value={text} 
                                     onChange={(e) => {setText(e.target.value)}} 
-                                    style={{width: '20vw'}}/>
+                                    />
                                 </Form.Group>
                             </Form>
                             <Button onClick={() => {createNewGroup(allGroups.length)}}>Add</Button>
