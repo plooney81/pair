@@ -29,7 +29,6 @@ export default function Messages({message}) {
     }, [])
     
     //TODO: Time function to display the message time
-    //TODO: React Syntax Highlighter on this page
 
     return (
         <div className="m-3">

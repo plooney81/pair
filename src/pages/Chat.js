@@ -79,7 +79,7 @@ useEffect(() => {
                 <span>{currentGroup.name}</span>
                 <Profile />
             </Card.Header>
-            <Card.Body className="d-flex flex-column align-items-center">
+            <Card.Body className="d-flex flex-column align-items-center messages-card-body">
                 <div className="d-flex flex-column align-items-stretch mb-3" style={{height: '100vh', width: '100%', overflow: 'auto'}}>
                     {messages.map((message, index) => {
                         return <Messages key={index} message={message}/>
