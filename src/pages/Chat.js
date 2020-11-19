@@ -7,7 +7,7 @@ import SideBar from '../components/SideBar';
 import Messages from '../components/Messages';
 import './Chat.css';
 import MessageForm from '../components/MessageForm';
-import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList, readError } from '../redux/action';
+import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList, readError, setSideBarShow } from '../redux/action';
 import Profile from './Profile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +17,8 @@ const {user} = useSelector(state => state.user);
 const messages = useSelector(state => state.messages);
 const currentGroup = useSelector(state => state.currentChatGroup);
 const dispatch = useDispatch();
-const [showSideBar, setShowSideBar] = useState(false);
+// const [showSideBar, setShowSideBar] = useState(false);
+const showSideBar = useSelector(state => state.sideBarShow);
 const messagesDbRef = db.ref("messages");
 const groupRef = currentGroup.group;
 const usersGroupDbRef = db.ref(`users/${user.uid}/groups`);
@@ -66,12 +67,12 @@ useEffect(() => {
             {showSideBar 
                 ? (
                     <>
-                    <Button onClick={() => {setShowSideBar(!showSideBar)}} className="hide-side-button"><FontAwesomeIcon icon={faBars} className="icon" /></Button>
+                    <Button onClick={() => {dispatch(setSideBarShow(false))}} className="hide-side-button"><FontAwesomeIcon icon={faBars} className="icon" /></Button>
                     <SideBar/>
                     </>
                 )
                 : (
-                    <Button onClick={() => {setShowSideBar(!showSideBar)}} className="hide-side-button"><FontAwesomeIcon icon={faBars} className="icon"/></Button>
+                    <Button onClick={() => {dispatch(setSideBarShow(true))}} className="hide-side-button"><FontAwesomeIcon icon={faBars} className="icon"/></Button>
                 )
             }
         <Card style={{height: 'calc(100vh - 76px)', width: '100%'}} className='chat-card'>

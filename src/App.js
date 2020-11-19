@@ -19,7 +19,7 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-     auth().onAuthStateChanged(function(user) {
+     auth().onAuthStateChanged((user) => {
         if (user) {
           const {displayName, email, uid} = user
           let photoURL = ''

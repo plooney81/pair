@@ -7,6 +7,7 @@ export const SET_ALL_USERS_GROUPS = 'SET_ALL_USERS_GROUPS';
 export const ADD_NEW_USER_GROUP = 'ADD_NEW_USER_GROUP';
 export const SET_ALL_POSSIBLE_GROUPS = 'SET_ALL_POSSIBLE_GROUPS';
 export const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT';
+export const SET_SIDEBAR_SHOW = 'SET_SIDEBAR_SHOW';
 
 export const login = (userInfo) => {
     return {
@@ -82,6 +83,15 @@ export const setCurrentChat = (chat) => {
         type: SET_CURRENT_CHAT,
         payload: {
             chat
+        }
+    }
+}
+
+export const setSideBarShow = (shouldShow) => {
+    return {
+        type: SET_SIDEBAR_SHOW,
+        payload: {
+            shouldShow
         }
     }
 }
