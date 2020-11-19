@@ -19,7 +19,6 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(auth().currentUser)
      auth().onAuthStateChanged(function(user) {
         if (user) {
           const {displayName, email, uid} = user

@@ -55,8 +55,8 @@ export default function SideBar() {
 
     return (
         <div style={{width: '30vw'}}>
-            <Card style={{height: 'calc(100vh - 56px)', width: '30vw', overflow: 'auto'}} className="sidebar-card">
-                <Card.Header>Channel</Card.Header>
+            <Card style={{height: 'calc(100vh - 76px)', width: '30vw', overflow: 'auto'}} className="sidebar-card">
+                <Card.Header style={{height: `64px`}}>Channel</Card.Header>
                 <Card.Body>
                     <Card.Text>
                         <h3>Current Groups</h3>

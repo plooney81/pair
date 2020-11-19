@@ -59,7 +59,7 @@ export default function MessageForm() {
             )}
             <Form onSubmit={handleSubmit} className={"d-flex flex-column message-form"} style={{backgroundColor: toggleFormColor}}>
                 <Form.Group>
-                    <Form.Control className="text-input" as="textarea" value={content} rows={1} placeholder={`Message to @${currentGroup.name}`} onChange={(e)=>{setContent(e.target.value)}}></Form.Control>
+                    <Form.Control className="text-input" as="textarea" value={content} rows={2} placeholder={`Message to @${currentGroup.name}`} onChange={(e)=>{setContent(e.target.value)}}></Form.Control>
                 </Form.Group>
                 <div className="d-flex justify-content-between icons-group">
                     <div className="first-btn-group d-flex">

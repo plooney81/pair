@@ -9,20 +9,20 @@ import './Chat.css';
 import MessageForm from '../components/MessageForm';
 import { setAllPossibleGroups, setMessagesAction, setUsersGroupsList, readError } from '../redux/action';
 import Profile from './Profile';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 export default function Chat() {
-const {user} = useSelector(state => state.user)
-const messages = useSelector(state => state.messages)
-const currentGroup = useSelector(state => state.currentChatGroup)
-const dispatch = useDispatch()
-
-
+const {user} = useSelector(state => state.user);
+const messages = useSelector(state => state.messages);
+const currentGroup = useSelector(state => state.currentChatGroup);
+const dispatch = useDispatch();
+const [showSideBar, setShowSideBar] = useState(false);
 const messagesDbRef = db.ref("messages");
-
-const groupRef = currentGroup.group
-
+const groupRef = currentGroup.group;
 const usersGroupDbRef = db.ref(`users/${user.uid}/groups`);
 const allGroupsDbRef = db.ref(`groups`);
+
 
 useEffect(() => {
     //! references to the chats path in the DB
@@ -63,9 +63,16 @@ useEffect(() => {
 }, [groupRef])
 
     return (
-        <div className="d-flex" >
-        <SideBar/>
-        <Card style={{height: 'calc(100vh - 56px)', width: '70vw'}} className='chat-card'>
+        <div className="d-flex">
+            {showSideBar 
+                ? (
+                    <SideBar/>
+                )
+                : (
+                    <Button onClick={setShowSideBar(!showSideBar)}><FontAwesomeIcon icon={faBars}/></Button>
+                )
+            }
+        <Card style={{height: 'calc(100vh - 76px)', width: '70vw'}} className='chat-card'>
             <Card.Header className="d-flex justify-content-between">
                 <span>{currentGroup.name}</span>
                 <Profile />
