@@ -66,12 +66,12 @@ useEffect(() => {
             {showSideBar 
                 ? (
                     <>
-                    <Button onClick={() => {setShowSideBar(!showSideBar)}}><FontAwesomeIcon icon={faBars}/></Button>
+                    <Button onClick={() => {setShowSideBar(!showSideBar)}} className="hide-side-button"><FontAwesomeIcon icon={faBars} className="icon" /></Button>
                     <SideBar/>
                     </>
                 )
                 : (
-                    <Button onClick={() => {setShowSideBar(!showSideBar)}}><FontAwesomeIcon icon={faBars}/></Button>
+                    <Button onClick={() => {setShowSideBar(!showSideBar)}} className="hide-side-button"><FontAwesomeIcon icon={faBars} className="icon"/></Button>
                 )
             }
         <Card style={{height: 'calc(100vh - 76px)', width: '100%'}} className='chat-card'>

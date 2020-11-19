@@ -16,7 +16,6 @@ export default function MessageForm() {
     const [isCode, setIsCode] = useState(false);
     const [showEmoji, setShowEmoji] = useState(false);
     const [toggleFormColor, setToggleFormColor] = useState(light);
-    const messagesArray = useSelector(state => state.messages)
     const {user} = useSelector(state => state.user)
     const currentGroup = useSelector(state => state.currentChatGroup)
     const dispatch = useDispatch();
@@ -55,7 +54,7 @@ export default function MessageForm() {
     return (
         <div>
             {showEmoji && (
-                <Picker className="emoji-picker" onSelect={pickEmoji} style={{width: '60vw'}}/>
+                <Picker className="emoji-picker" onSelect={pickEmoji} style={{width: '70vw'}}/>
             )}
             <Form onSubmit={handleSubmit} className={"d-flex flex-column message-form"} style={{backgroundColor: toggleFormColor}}>
                 <Form.Group>

@@ -44,7 +44,7 @@ export default function Messages({message}) {
                         <span className="pb-1 ml-3">{`${time.getMonth() + 1}/${time.getDate()}/${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`}</span>
                     </div>
                     <div>
-                        <ReactMarkdown source={message.content} renderers={{code: CodeBlock}}/>
+                        <ReactMarkdown source={message.content} renderers={{code: CodeBlock}} className="markdown-messages"/>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@ export default function Messages({message}) {
                         <span className="pb-1 ml-3">{`${time.getMonth() + 1}/${time.getDate()}/${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`}</span>
                     </div>
                     <div>
-                        <ReactMarkdown source={message.content} renderers={{code: CodeBlock}}/>
+                        <ReactMarkdown source={message.content} renderers={{code: CodeBlock}} className="markdown-messages"/>
                     </div>
                 </div>
             </div>

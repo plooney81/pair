@@ -24,10 +24,10 @@ h3{
 
 .totalSidebar{
     position: absolute;
-    width: calc(100vw - 50px);
-    left: 50px;
+    width: calc(100vw - 26px);
+    left: 26px;
     z-index: 1;
-    height: calc(100vh - 75px);
+    height: calc(100vh - 76px);
 }
 
 @media(min-width:768px){

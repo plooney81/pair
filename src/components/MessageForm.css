@@ -17,14 +17,10 @@ svg:hover{
     /* position: fixed;
     bottom: 10px; */
     align-self: center;
-    width: 60vw;
+    width: 70vw;
 }
 
 .text-input{
     background-color: var(--light)!important;
     border-radius: 5px;
 }
-
-/* .dark-form{
-    background-color: var(--main);
-} */
