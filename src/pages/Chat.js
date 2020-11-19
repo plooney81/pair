@@ -61,24 +61,26 @@ useEffect(() => {
         dispatch(setAllPossibleGroups(allGroupArray));
     })
 }, [groupRef])
-
     return (
         <div className="d-flex">
             {showSideBar 
                 ? (
+                    <>
+                    <Button onClick={() => {setShowSideBar(!showSideBar)}}><FontAwesomeIcon icon={faBars}/></Button>
                     <SideBar/>
+                    </>
                 )
                 : (
-                    <Button onClick={setShowSideBar(!showSideBar)}><FontAwesomeIcon icon={faBars}/></Button>
+                    <Button onClick={() => {setShowSideBar(!showSideBar)}}><FontAwesomeIcon icon={faBars}/></Button>
                 )
             }
-        <Card style={{height: 'calc(100vh - 76px)', width: '70vw'}} className='chat-card'>
+        <Card style={{height: 'calc(100vh - 76px)', width: '100%'}} className='chat-card'>
             <Card.Header className="d-flex justify-content-between">
                 <span>{currentGroup.name}</span>
                 <Profile />
             </Card.Header>
-            <Card.Body className="d-flex flex-column">
-                <div className="d-flex flex-column align-items-stretch mb-3" style={{height: '100vh', overflow: 'auto'}}>
+            <Card.Body className="d-flex flex-column align-items-center">
+                <div className="d-flex flex-column align-items-stretch mb-3" style={{height: '100vh', width: '100%', overflow: 'auto'}}>
                     {messages.map((message, index) => {
                         return <Messages key={index} message={message}/>
                     })}
