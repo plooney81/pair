@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { db } from '../services/firebase';
 import './Messages.css';
 import {pairLogoURL} from '../services/usersDbFunctions';
+import ReactMarkdown from 'react-markdown';
+import CodeBlock from './CodeBlock';
 
 export default function Messages({message}) {
     const {user} = useSelector(state => state.user)
@@ -27,9 +29,10 @@ export default function Messages({message}) {
     }, [])
     
     //TODO: Time function to display the message time
-    
+    //TODO: React Syntax Highlighter on this page
+
     return (
-        <div className="mt-3">
+        <div className="m-3">
         {isCurrentUser ? (
             <div className="d-flex">
                 <div>
@@ -41,7 +44,7 @@ export default function Messages({message}) {
                         <span className="pb-1 ml-3">{`${time.getMonth() + 1}/${time.getDate()}/${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`}</span>
                     </div>
                     <div>
-                        {message.content}
+                        <ReactMarkdown source={message.content} renderers={{code: CodeBlock}}/>
                     </div>
                 </div>
             </div>
@@ -56,7 +59,7 @@ export default function Messages({message}) {
                         <span className="pb-1 ml-3">{`${time.getMonth() + 1}/${time.getDate()}/${time.getFullYear()} ${time.getHours()}:${time.getMinutes()}`}</span>
                     </div>
                     <div>
-                        {message.content}
+                        <ReactMarkdown source={message.content} renderers={{code: CodeBlock}}/>
                     </div>
                 </div>
             </div>

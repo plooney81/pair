@@ -10,21 +10,26 @@ import './MessageForm.css';
 import 'emoji-mart/css/emoji-mart.css';
 
 export default function MessageForm() {
+    const light = '#F9FBFB';
+    const dark = '#484c56';
     const [content, setContent] = useState('');
+    const [isCode, setIsCode] = useState(false);
     const [showEmoji, setShowEmoji] = useState(false);
+    const [toggleFormColor, setToggleFormColor] = useState(light);
     const messagesArray = useSelector(state => state.messages)
     const {user} = useSelector(state => state.user)
     const currentGroup = useSelector(state => state.currentChatGroup)
     const dispatch = useDispatch();
     const messages = db.ref().child("messages");
-    const primaryKey = `${currentGroup.group}/m${messagesArray.length}`;
+    const primaryKey = `${currentGroup.group}`;
     const handleSubmit = (e) => {
         e.preventDefault();
         setContent('');
-        messages.child(primaryKey).set({
+        messages.child(primaryKey).push({
             name: user.displayName,
             content,
             timeStamp: Date.now(),
+            isCode,
             uid: user.uid
         }, error => {
             if(error){
@@ -40,27 +45,33 @@ export default function MessageForm() {
     const showEmojis = () => {
         setShowEmoji(!showEmoji)
     }
+    const changeFormColor = () => {
+        setIsCode(!isCode);
+        const changeColor = toggleFormColor === light ? dark : light
+        setToggleFormColor(changeColor);
+    }
+
 
     return (
         <div>
             {showEmoji && (
                 <Picker className="emoji-picker" onSelect={pickEmoji} style={{width: '60vw'}}/>
             )}
-            <Form onSubmit={handleSubmit} className="d-flex flex-column message-form" >
+            <Form onSubmit={handleSubmit} className={"d-flex flex-column message-form"} style={{backgroundColor: toggleFormColor}}>
                 <Form.Group>
-                    <Form.Control className="text-input" type="text" placeholder={`Message to @${currentGroup.name}`} value={content} onChange={(e)=>{setContent(e.target.value)}}></Form.Control>
+                    <Form.Control className="text-input" as="textarea" value={content} rows={1} placeholder={`Message to @${currentGroup.name}`} onChange={(e)=>{setContent(e.target.value)}}></Form.Control>
                 </Form.Group>
                 <div className="d-flex justify-content-between icons-group">
                     <div className="first-btn-group d-flex">
-                        <FontAwesomeIcon icon={faLightbulb}/>
+                        {/* <FontAwesomeIcon icon={faLightbulb}/>
                         <FontAwesomeIcon icon={faBold}/>
                         <FontAwesomeIcon icon={faItalic}/>
-                        <FontAwesomeIcon icon={faStrikethrough}/>
-                        <FontAwesomeIcon icon={faCode}/>
-                        <FontAwesomeIcon icon={faLink}/>
+                        <FontAwesomeIcon icon={faStrikethrough}/> */}
+                        <FontAwesomeIcon icon={faCode} onClick={changeFormColor}/>
+                        {/* <FontAwesomeIcon icon={faLink}/> */}
                     </div>
                     <div className="first-btn-group d-flex">
-                        <FontAwesomeIcon icon={faPaperclip}/>
+                        {/* <FontAwesomeIcon icon={faPaperclip}/> */}
                         <FontAwesomeIcon icon={faSmileBeam} onClick={showEmojis}/>
                         <FontAwesomeIcon icon={faPaperPlane} onClick={handleSubmit}/>
                     </div>
