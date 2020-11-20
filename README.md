@@ -37,7 +37,7 @@
 Pair was built with using React, Redux, Firebase Authentication, Firebase Realtime Database, Firebase Storage, and React-Bootstrap.
 Pair also utilizes React-markdown and React-Syntax-Highlighter to render code snippets in different programming languages.
   
-![Code Snippet](src/img/CodeSnippet.png)
+![Code Snippet](src/img/codeSnippet.png)
 
 ### Project Contributors:
 * Peter Looney <a href='https://github.com/plooney81'><img src="https://img.shields.io/badge/github%20-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white"/></a><a href='https://www.linkedin.com/in/peter-looney-27b732166/'><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white"/></a>
