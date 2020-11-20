@@ -3,7 +3,7 @@ import pairLogoGif from '../img/pairLogo.gif';
 
 export default function Home() {
     //? Responsiveness addition
-    const [windowWidth, setWindowWidth] = useState(null)
+    const [windowWidth, setWindowWidth] = useState(1200)
     const mediaQuery = {
         desktop: 1200,
         tablet: 768,
