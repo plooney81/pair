@@ -13,8 +13,9 @@
 
 .hide-side-button{
     width: 10px!important;
-    display: flex;
+    display: flex!important;
     justify-content: center!important;
+    align-items: center!important;
     text-align: center!important;
     border-radius: 0!important;
     background-color: var(--shades)!important;
