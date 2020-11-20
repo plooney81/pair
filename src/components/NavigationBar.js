@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Navbar, Nav, Form, Button} from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import { logout } from '../redux/action';
 import { auth } from '../services/firebase';
 import './NavigationBar.css';
 import pairLogo from '../img/pair_logo.svg';
-import NavbarToggle from 'react-bootstrap/esm/NavbarToggle';
+
 
 export default function NavigationBar() {
-    const isLoggedIn = useSelector(state => state)
     const dispatch = useDispatch()
-    const [error, setError] = useState('');
     const history = useHistory();
     const loginLocation = { pathname: '/login'}
     
@@ -23,7 +21,7 @@ export default function NavigationBar() {
                 history.push(loginLocation)
             })
             .catch((error) => {
-                setError(error);
+                console.log(error)
             })
     }
     return (

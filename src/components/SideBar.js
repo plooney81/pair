@@ -1,5 +1,3 @@
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -58,7 +56,7 @@ export default function SideBar() {
             <Card style={{height: '100%', width: '100%', overflow: 'auto'}} className="sidebar-card">
                 <Card.Header style={{height: `64px`}}>Channel</Card.Header>
                 <Card.Body>
-                    <Card.Text>
+                    <div className="card-text">
                         <h3>Current Groups</h3>
                         <ul>
                         {userGroups.map((group) => {
@@ -92,7 +90,7 @@ export default function SideBar() {
                             </Form>
                             <Button onClick={() => {createNewGroup(allGroups.length)}}>Add</Button>
                         <hr></hr>
-                    </Card.Text>
+                    </div>
                 </Card.Body>
             </Card>
         </div>
