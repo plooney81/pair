@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-import googleLogo from './google.svg';
-import githubLogo from './github.png';
+import googleLogo from '../img/google.svg';
+import githubLogo from '../img/github.png';
 
 
 import { signup, signInWithGoogle, signInWithGitHub } from '../helpers/auth';

@@ -4,9 +4,10 @@ import { Form, Button, Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/action';
 import { Link, useHistory } from 'react-router-dom';
-import googleLogo from './google.svg';
-import githubLogo from './github.png';
+import googleLogo from '../img/google.svg';
+import githubLogo from '../img/github.png';
 import { signInFunction } from '../services/usersDbFunctions';
+
 
 export default function Login() {
     const [email, setEmail] = useState('');
