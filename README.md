@@ -19,8 +19,6 @@
   - [Navigating Chat Groups](#navigating-chat-groups)
   - [Sending Messages and Code Snippets](#sending-messages-and-code-snippets)
   - [Changing Profile Information](#changing-profile-information)
-- [**Description and Requirements**](#description-and-requirements)
-- [**Lessons Learned**](#lessons-learned)
 
 <hr>
 
@@ -101,18 +99,18 @@ Pair also utilizes React-markdown and React-Syntax-Highlighter to render code sn
 
 <!-- ### Demo: -->
 
-<hr>
-
+<!-- <hr> -->
+<!-- 
 ## **Description and Requirements**  
 
-<hr>
+<!-- <hr> -->
 
-## **Lessons Learned**
+<!-- ## **Lessons Learned** -->
 
 <!-- ## **Credit** and **Licenses** -->
 
 
-```js
+<!-- ```js
 //JavaScript
 console.log('Hello World');
 ```
@@ -120,4 +118,4 @@ console.log('Hello World');
 ```python
 #Python
 print('Welcome to Pair!')
-```
+``` -->
