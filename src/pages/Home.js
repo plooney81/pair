@@ -17,7 +17,7 @@ export default function Home() {
     }, [])
 
     const responsivePic = {
-        width: windowWidth < mediaQuery.phone ? '100%' : '50%',
+        width: windowWidth < mediaQuery.phone ? '100%' : 'auto',
         borderRadius: '.25rem'
     }
     
