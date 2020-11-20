@@ -48,10 +48,7 @@ export default function Messages({message}) {
                 </div>
             </div>
         ) : (        
-            <div className="d-flex">
-                <div>
-                    <img src={messageImgURL} alt={`${message.name}'s profile pic`} style={imgStyling}/>
-                </div>
+            <div className="d-flex justify-content-end">
                 <div className='message-card notuser p-2'>
                     <div className="d-flex align-items-center">
                         <h4>{message.name}</h4>
@@ -60,6 +57,9 @@ export default function Messages({message}) {
                     <div>
                         <ReactMarkdown source={message.content} renderers={{code: CodeBlock}} className="markdown-messages"/>
                     </div>
+                </div>
+                <div className="ml-1">
+                    <img src={messageImgURL} alt={`${message.name}'s profile pic`} style={imgStyling}/>
                 </div>
             </div>
         )}
