@@ -34,26 +34,18 @@ export default function NavigationBar() {
             <Navbar.Toggle/>
             <Navbar.Collapse >
                 <Nav className="mr-auto">
-                <Nav.Link>
-                    <NavLink to="/" className="navbar-link">
+                    <NavLink to="/" className="nav-link" role="button">
                         Home
                     </NavLink>
-                </Nav.Link>
-                <Nav.Link>
-                    <NavLink to="/signup" className="navbar-link">
+                    <NavLink to="/signup" className="nav-link" role="button">
                         Signup
                     </NavLink>
-                </Nav.Link>
-                <Nav.Link>
-                    <NavLink to="/login" className="navbar-link">
+                    <NavLink to="/login" className="nav-link" role="button">
                         Login
                     </NavLink>
-                </Nav.Link>
-                <Nav.Link>
-                    <NavLink to="/chat" className="navbar-link">
+                    <NavLink to="/chat" className="nav-link" role="button">
                         Chat
                     </NavLink>
-                </Nav.Link>
                 </Nav>
                 <Form inline onSubmit={signOut}>
                     <Button variant="outline-info" className="sign-out" type="submit" style={{color: '#fafafa', borderColor: '#fafafa'}}>Sign Out</Button>
