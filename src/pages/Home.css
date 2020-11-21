@@ -1,0 +1,15 @@
+@media(max-width:576px){
+    .logo-gif {
+        width: 100%;
+    }
+}
+
+@media(min-width:576px){
+    .logo-gif {
+        width: 50%;
+    }
+}
+
+.logo-gif{
+    border-radius: .25rem;
+}
