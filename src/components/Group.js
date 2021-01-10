@@ -55,7 +55,7 @@ export default function Group({group, notOn}) {
                 </>
                 :
                 <>
-                    <span onClick={handleGroupChoose}>{groupInfo.name}</span>
+                    <span onClick={handleGroupChoose} className={`addedGroup${groupInfo.name}`}>{groupInfo.name}</span>
                     <FontAwesomeIcon icon={faMinusSquare} className='ml-2' onClick={deSubscribeToGroup}/>
                 </>
                 }
