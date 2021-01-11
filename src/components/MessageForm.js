@@ -72,7 +72,7 @@ export default function MessageForm() {
                     <div className="first-btn-group d-flex">
                         {/* <FontAwesomeIcon icon={faPaperclip}/> */}
                         <FontAwesomeIcon icon={faSmileBeam} onClick={showEmojis}/>
-                        <FontAwesomeIcon icon={faPaperPlane} onClick={handleSubmit}/>
+                        <FontAwesomeIcon icon={faPaperPlane} onClick={handleSubmit} className='sendAirplane'/>
                     </div>
                 </div>
             </Form>
